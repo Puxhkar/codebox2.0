@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -12,8 +13,9 @@ function Hero() {
         <h2 className='font-bold text-7xl font-game text-yellow-400'>Coding Adventure</h2>
 
         <h2 className='mt-5 font-game text-3xl'> Beginner friendly coding course and Projects </h2>
-
+        <Link href={'/sign-in'}>
         <Button className='font-game text-3xl p-6 mt-7' variant={"pixel"}>Get Started</Button>
+        </Link>
       </div>
     </div>
   )
