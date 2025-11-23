@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter , Pixelify_Sans} from "next/font/google";
+import { Geist, Geist_Mono, Inter, Pixelify_Sans,Jersey_10 } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,15 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const GameFont = Pixelify_Sans({
-  variable : "--font-game",
-  subsets: ["latin"]
+const gameFont = Jersey_10({
+  variable: "--font-game",
+  subsets: ["latin"],
+  weight: ['400']
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets :["latin"]
-})
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,16 +31,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}
-        ${GameFont.variable} ${inter.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gameFont.variable} ${inter.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={true}
+          disableTransitionOnChange={true}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
