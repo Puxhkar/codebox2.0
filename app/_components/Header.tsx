@@ -89,7 +89,7 @@ function Header() {
 
           {/* Item with dropdown */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
             <NavigationMenuContent className="p-4">
               <NavigationMenuLink asChild>
                 <ul className='grid grid-cols-2 gap-2 sm:w-[400px] md:lg:w-[500px] lg:w-[600px]'>
@@ -124,10 +124,10 @@ function Header() {
         </NavigationMenuList>
       </NavigationMenu>
 
-      {!user? 
+      {!user ?
       <Link href={'/sign-in'}>
-      <Button className="font-game text-2xl" variant="pixel">Signup</Button>
-      </Link>
+       <Button className="font-game text-2xl" variant="pixel">Signup</Button>
+       </Link>
       :<div className='flex gap-4 items-center'>
         <Button className="font-game text-2xl" variant="pixel">Dashboard</Button>
         <UserButton/>
