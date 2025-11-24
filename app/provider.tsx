@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import axios from 'axios'
 import { UserDetailContext } from './context/UserDetailsContext';
 import { set } from 'date-fns';
+import Header from './_components/Header';
 function Provider( {
     children,
     ...props
@@ -22,12 +23,14 @@ function Provider( {
         setUserDetail(result?.data)
     }
 
-
-
   return (
     <NextThemesProvider {...props}>
-      <UserDetailContext.Provider value={{userDetails,setUserDetail}}/>
-        {children}
+      <UserDetailContext.Provider value={{ userDetails, setUserDetail }}>
+  <div className="flex flex-col items-center">
+    <Header />
+  </div>
+  {children}
+</UserDetailContext.Provider>
     </NextThemesProvider>
   )
 }
