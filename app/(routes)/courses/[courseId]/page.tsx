@@ -40,6 +40,7 @@ function CourseDetails() {
       <CourseDetailBanner 
         loading={loading}
         courseDetail={courseDetail}
+        refreshData={()=> GetCourseDetails()}
       />
 
       {/* PAGE CONTENT */}
