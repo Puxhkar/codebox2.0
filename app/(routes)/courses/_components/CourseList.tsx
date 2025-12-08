@@ -15,8 +15,16 @@ export type Course = {
   tag: string,
   chapters?:Chapter[],
   userEnrolled?: boolean,
-  courseEnrolledInfo?: courseEnrolledInfo
+  courseEnrolledInfo?: courseEnrolledInfo,
+  completedExcercises?: completedExcercises[]
 }
+
+type  completedExcercises={
+  chapterId: number,
+  courseId: number,
+  exerciseId: number
+}
+
 
 type courseEnrolledInfo={
   xpEarned: number,

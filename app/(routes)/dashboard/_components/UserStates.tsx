@@ -6,6 +6,7 @@ import { useUser } from '@clerk/nextjs';
 function UserStates() {
   const { user } = useUser()
 
+
   return (
     <div className='p-5 border-4 rounded-2xl'>
       

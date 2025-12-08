@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-function InviteFrame() {
+function InviteFriend() {
   return (
     <div className='flex flex-col items-center mt-8 p-4 border rounded-xl'>
         <Image src={'/invitation.gif'} alt='mail' width={80} height={80}/>
@@ -17,4 +17,4 @@ function InviteFrame() {
   )
 }
 
-export default InviteFrame
+export default InviteFriend
