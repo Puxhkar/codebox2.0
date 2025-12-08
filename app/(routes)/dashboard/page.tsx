@@ -2,9 +2,9 @@ import React from 'react'
 import WelcomeBanner from './_components/WelcomeBanner'
 import EnrolledCourses from './_components/EnrolledCourses'
 import ExploreMore from './_components/ExploreMore'
-import InviteFrame from './_components/InviteFrame'
+import InviteFrame from './_components/InviteFriend'
 import UserStates from './_components/UserStates'
-import UpgradeToPro from './_components/Upgrade-To-Pro'
+import UpgradeToPro from './_components/UpgradeToPro'
 import Header from '@/app/_components/Header'
 
 function Dashboard() {
