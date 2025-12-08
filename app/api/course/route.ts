@@ -18,7 +18,7 @@ if (courseId){
 
     const chapterResult = await db.select().from(CourseChapterTable)
         //@ts-ignore
-    .where(eq(CourseChapterTable.courseId,courseId))
+    .where(eq(CourseChapterTable.courseId,courseId)).orderBy(CourseChapterTable.chapterId)
 
     const enrolledCourse= await db.select().from(EnrolledCourseTable)
      //@ts-ignore
