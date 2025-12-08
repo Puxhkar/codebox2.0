@@ -19,20 +19,20 @@ export type Course = {
   completedExcercises?: completedExcercises[]
 }
 
-type  completedExcercises={
+export type  completedExcercises={
   chapterId: number,
   courseId: number,
   exerciseId: number
 }
 
 
-type courseEnrolledInfo={
+export type courseEnrolledInfo={
   xpEarned: number,
   enrolledDate: any,
 }
 
 
-type Chapter={
+export type Chapter={
   chapterId: number,
   courseId: number,
   desc: string,
@@ -41,7 +41,7 @@ type Chapter={
   exercises:exercise[]
 }
 
-type exercise={
+export type exercise={
   name:string,
   slug:string,
   xp:number ,

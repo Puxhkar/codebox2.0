@@ -113,6 +113,19 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
+/* Highlight HTML tags in blue */
+.html-tag {
+  color: #3b82f6; /* blue-500 */
+  font-weight: 600;
+}
+
+/* Improve readability */
+.exercise-content {
+  font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
 
 @layer base {
   * {
