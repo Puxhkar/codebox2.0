@@ -50,7 +50,7 @@ function CourseStatus({courseDetail}:Props) {
         <div className='flex items-center mt-4 gap-5 '>
         <Image src={'/books.png'} alt='image' width={50} height={50}/>
             <h2 className='flex justify-between text-2xl '>Exercises-
-                <span className='text-yellow-500'>1/{courseDetail?.completedExcercises?.length}/{counts?.totalExce}</span> </h2>
+                <span className='text-yellow-500'>1{courseDetail?.completedExcercises?.length}/{counts?.totalExce}</span> </h2>
                 {/* @ts-ignore */}
             <Progress value={updateProgress(courseDetail?.completedExcercises?.length??0,counts?.totalExce)} className='mt-2'/>
         </div>

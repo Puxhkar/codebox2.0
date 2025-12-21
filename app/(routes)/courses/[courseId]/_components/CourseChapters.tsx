@@ -72,14 +72,15 @@ const isExerciseCompleted=(chapterId:number,exerciseId:number)=>{
                     <h2>{exc.name}</h2>
                     </div>
                     
-                    {EnableExercise(index,indexExc, chapter?.exercises.length)? 
-                    <Link href={'/courses/'+courseDetail?.courseId+'/'+chapter?.chapterId+ '/' +exc?.slug}>
+                    {
+
+                    isExerciseCompleted(chapter?.chapterId,Number(indexExc) +1)?
+                    <Button variant={"pixel"} className='bg-green-600'>Completed</Button>:
+                    courseDetail?.userEnrolled?
+                   <Link href={'/courses/'+courseDetail?.courseId+'/'+chapter?.chapterId+ '/' +exc?.slug}>
                     <Button variant={"pixel"}>{exc?.xp} xp</Button>
                     </Link>:
-
-                    isExerciseCompleted(chapter?.chapterId,index+1)?
-                    <Button variant={"pixel"} className='bg-green-600'>Completed</Button>
-                    :<TooltipProvider>
+                    <TooltipProvider>
   <Tooltip>
     <TooltipTrigger asChild>
       <Button variant="pixelDisabled">***</Button>
