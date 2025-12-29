@@ -45,7 +45,7 @@ function Header() {
       {/* Logo */}
       <div className="flex gap-2 items-center">
         <Image src="/logo.png" alt="logo" width={40} height={40} />
-        <h2 className="font-bold font-game text-3xl">CodeBox</h2>
+        <h2 className="font-bold font-game text-3xl">StudentCodeBox</h2>
       </div>
 
       {/* Navbar */}
