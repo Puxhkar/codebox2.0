@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import Link from "next/link";
+import { useAuth } from '@clerk/nextjs'
 
 
 
@@ -24,6 +25,9 @@ type Props = {
 }
 
 function CourseChapters({loading,courseDetail}:Props) {
+
+  const {has} = useAuth();
+  const hasUnlimitedAccess = has&&has({ plan: 'unlimited' })
 
 const EnableExercise = (
     chapterIndex: number,

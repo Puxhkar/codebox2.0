@@ -15,5 +15,4 @@ function WelcomeBanner() {
     </div>
   )
 }
-
 export default WelcomeBanner

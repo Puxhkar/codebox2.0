@@ -1,24 +1,64 @@
-import React from 'react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import React from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Exploremoresection from "./Exploremoresection";
 
 function Hero() {
   return (
-    <div className='w-full relative h-screen overflow-hidden'>
-      <Image src={"/banner.gif"} alt='hero' width={1000} height={1000}
-      className='w-full h-full object-cover absolute inset-0'/>
-      <div className='absolute w-full flex flex-col items-center mt-24'>
-        <h2 className='font-bold text-7xl font-game'>Start Your</h2>
-        <h2 className='font-bold text-7xl font-game text-yellow-400'>Coding Adventure</h2>
+    <>
+      {/* HERO SECTION */}
+      <section className="relative w-full min-h-[85vh] overflow-hidden pb-24">
+        
+        {/* Background Image */}
+        <Image
+          src="/banner.gif"
+          alt="hero"
+          fill
+          priority
+          className="object-cover"
+        />
 
-        <h2 className='mt-5 font-game text-3xl'> Beginner friendly coding course and Projects </h2>
-        <Link href={'/sign-in'}>
-        <Button className='font-game text-3xl p-6 mt-7' variant={"pixel"}>Get Started</Button>
-        </Link>
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-[85vh] text-center px-4">
+          
+          <h1 className="font-game font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight text-white">
+            Start Your
+          </h1>
+
+          <h1 className="font-game font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.6)]">
+            Coding Adventure
+          </h1>
+
+          <p className="mt-6 max-w-2xl font-game text-lg md:text-2xl text-gray-200">
+            Beginner-friendly coding courses, real projects, and game-like learning
+          </p>
+
+          <Link href="/sign-in">
+            <Button
+              variant="pixel"
+              className="mt-10 px-10 py-7 text-2xl md:text-3xl font-game transition-transform hover:scale-105"
+            >
+              Get Started
+            </Button>
+          </Link>
+        </div>
+
+        {/* Scroll Hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-300 font-game text-sm animate-bounce">
+          ↓ Scroll to explore courses
+        </div>
+      </section>
+
+      {/* COURSE SECTION */}
+      <div className="-mt-28 relative z-20">
+        <Exploremoresection />
       </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default Hero
+export default Hero;
