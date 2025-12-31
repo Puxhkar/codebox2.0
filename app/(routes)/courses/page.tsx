@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import CourseList from './_components/CourseList';
-import Header from '@/app/_components/Header';
+import Header from '@/app/_components/header';
 
 function Courses() {
   return (

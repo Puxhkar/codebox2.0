@@ -5,7 +5,7 @@ import ExploreMore from './_components/ExploreMore'
 import InviteFrame from './_components/InviteFriend'
 import UserStates from './_components/UserStates'
 import UpgradeToPro from './_components/UpgradeToPro'
-import Header from '@/app/_components/Header'
+import Header from '@/app/_components/header'
 
 function Dashboard() {
   return (

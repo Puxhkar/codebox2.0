@@ -9,7 +9,7 @@ import 'react-splitter-layout/lib/index.css';
 import Link from 'next/link'; // ✅ FIXED
 import { completedExcercises, exercise } from '../../../_components/CourseList';
 import ContentSection from './_components/ContentSection';
-import Header from '@/app/_components/Header';
+import Header from '@/app/_components/header';
 import CodeEditor from './_components/CodeEditor';
 import { Button } from '@/components/ui/button';
 

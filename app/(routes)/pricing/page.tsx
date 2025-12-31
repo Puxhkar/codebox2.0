@@ -1,6 +1,6 @@
 import { PricingTable } from "@clerk/nextjs";
 import React from "react";
-import Header from "@/app/_components/Header";
+import Header from "@/app/_components/header";
 
 function Pricing() {
   return (
