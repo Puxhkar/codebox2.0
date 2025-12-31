@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import axios from 'axios'
 import { UserDetailContext } from './context/UserDetailsContext';
 import { set } from 'date-fns';
-import Header from './_components/header';
+import Header from './_components/Header';
 function Provider( {
     children,
     ...props
