@@ -7,7 +7,7 @@ import { Course } from '../_components/CourseList'
 import CourseChapters from './_components/CourseChapters'
 import CourseStatus from './_components/CourseStatus'
 import UpgradeToPro from '../../dashboard/_components/UpgradeToPro'
-import Header from '@/app/_components/header'
+import Header from '@/app/_components/Header'
 
 function CourseDetails() {
 

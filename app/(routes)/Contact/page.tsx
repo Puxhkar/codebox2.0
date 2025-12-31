@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import Header from "@/app/_components/header";
+import Header from "@/app/_components/Header";
 
 function Contacts() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import CourseList from '../courses/_components/CourseList'
-import Header from '@/app/_components/header'
+import Header from '@/app/_components/Header'
 
 function Project() {
   return (
