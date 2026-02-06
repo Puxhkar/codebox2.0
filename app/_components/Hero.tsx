@@ -1,10 +1,14 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Exploremoresection from "./Exploremoresection";
+import { useAuth } from '@clerk/nextjs'
+
 
 function Hero() {
+  const { isSignedIn } = useAuth();
   return (
     <>
       {/* HERO SECTION */}
@@ -36,15 +40,24 @@ function Hero() {
           <p className="mt-6 max-w-2xl font-game text-lg md:text-2xl text-gray-200">
             Beginner-friendly coding courses, real projects, and game-like learning
           </p>
-
-          <Link href="/sign-in">
+          {!isSignedIn && <Link href="/sign-in">
             <Button
               variant="pixel"
               className="mt-10 px-10 py-7 text-2xl md:text-3xl font-game transition-transform hover:scale-105"
             >
               Get Started
             </Button>
-          </Link>
+          </Link>}
+          {isSignedIn && <Link href="/dashboard">
+            <Button
+              variant="pixel"
+              className="mt-10 px-10 py-7 text-2xl md:text-3xl font-game transition-transform hover:scale-105"
+            >
+              Dashboard
+            </Button>
+          </Link>}
+
+
         </div>
 
         {/* Scroll Hint */}
