@@ -41,8 +41,42 @@ Our architecture removes the need for traditional backend servers. The React fro
 
 ## 5. Database Design
 **ER Diagram:**
-*(Add ER diagram image here)*
+erDiagram
+  ```mermaid
+    SKU ||--o{ SalesData : has
+    SKU ||--o{ Forecast : has
+    SKU ||--o{ InventoryMetrics : has
 
+    SKU {
+        string sku_id PK
+        string sku_name
+    }
+
+    SalesData {
+        string sales_id PK
+        date date
+        string sku_id FK
+        int sales_quantity
+    }
+
+    Forecast {
+        string forecast_id PK
+        string sku_id FK
+        date forecast_date
+        int forecast_quantity
+        float lower_confidence
+        float upper_confidence
+    }
+
+    InventoryMetrics {
+        string metric_id PK
+        string sku_id FK
+        int safety_stock
+        int reorder_point
+        int lead_time
+        float service_level
+    }
+```
 **ER Diagram Description:**
 To guarantee speed and protect proprietary sales data, the system relies on an **In-Memory Client-Side State Mechanism** rather than a traditional relational database. Data is parsed via PapaParse from flat files into structured JSON objects temporarily held in React's virtual DOM memory.
 
