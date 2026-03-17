@@ -1,170 +1,87 @@
-# Inventory Demand Forecasting Tool
-> A purely client-side predictive analytics tool using exponential smoothing to forecast inventory demand from CSV datasets natively in the browser.
+# CodeBox 2.0
 
----
+CodeBox 2.0 is an interactive coding and learning platform designed to help users learn programming languages and web development interactively. Built with standard modern web technologies, it provides a seamless experience for taking courses, reading chapters, and completing hands-on coding exercises directly in the browser through a built-in code editor.
 
-## 1. Problem Statement
-**Problem Title:** Unpredictable Inventory Demand & Stockouts
-**Problem Description:** Retailers and small business owners struggle to accurately predict product demand based on historical data. This leads to either overstocking (tying up capital and warehouse space) or understocking (missing out on sales and losing customer trust).
-**Target Users:** Retail managers, inventory planners, e-commerce store owners, and small-medium businesses.
-**Existing Gaps:** Existing forecasting solutions are often overly complex, require expensive backend infrastructure, mandate sharing private sales data with third parties, and are incredibly slow to generate insights.
+## 🚀 Features
 
-## 2. Problem Understanding & Approach
-**Root Cause Analysis:** Volatile market trends and failure to mathematically account for seasonality and base trends in an integrated, accessible manner.
-**Solution Strategy:** Build a lightning-fast, offline-first web application that runs statistical time-series forecasting (Holt's Double Exponential Smoothing) directly on the client side, giving users immediate feedback and dynamic restocking recommendations without leaving their browser.
+- **Interactive Coding Environment**: Integrated with [@codesandbox/sandpack-react](https://sandpack.codesandbox.io/) for realtime in-browser code execution.
+- **Structured Courses**: Browse and enroll in various courses (HTML, CSS, Python, React, etc.), divided into manageable chapters and exercises.
+- **User Authentication**: Secure user sign-up and login powered by [Clerk](https://clerk.com/).
+- **Progress Tracking**: Track enrolled courses, completed exercises, and earn XP points.
+- **Modern UI/UX**: Built with [Tailwind CSS v4](https://tailwindcss.com/) and [Radix UI](https://www.radix-ui.com/) components for a beautiful, responsive, and accessible user interface.
+- **Database Architecture**: Fast and reliable serverless Postgres database using [Neon](https://neon.tech/) and [Drizzle ORM](https://orm.drizzle.team/).
 
-## 3. Proposed Solution
-**Solution Overview:** A seamless web dashboard where users can drag and drop their historical sales CSV data to instantly visualize trends, automatically decompose seasonality, and predict future demand up to a customizable horizon.
-**Core Idea:** Empower small businesses with enterprise-level statistical forecasting models running locally in their browser, ensuring 100% data privacy and zero latency.
-**Key Features:** 
-- Drag-and-drop CSV Parsing
-- Holt's Method Forecasting Engine
-- Additive Time-Series Seasonality Decomposition
-- Dynamic UI to tune parameters (Alpha, Beta, Horizon, Lead Time)
-- Automated Inventory Metrics (Reorder Point, Safety Stock)
+## 🛠️ Tech Stack
 
-## 4. System Architecture
-**High-Level Flow:**
-1. User uploads CSV data.
-2. Data processed into React State.
-3. Forecasting Engine (`forecasting.js`) computes trends and seasonality.
-4. UI metrics and Recharts render visualizations dynamically.
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, Lucide React (Icons)
+- **Database**: PostgreSQL (Neon), Drizzle ORM
+- **Authentication**: Clerk
+- **Interactive Sandbox**: Sandpack (by CodeSandbox)
+- **Components/UI**: Radix UI, Shadcn-like components, Recharts for analytics
 
-**User → Frontend → Backend → Model → Database → Response**
-> *Note: For maximum speed and privacy, this application is fully decentralized.*
-User → React Frontend → Forecasting Engine (Client-side JS Model) → Recharts Visualization (Response)
+## 📦 Getting Started
 
-**Architecture Description:** 
-Our architecture removes the need for traditional backend servers. The React frontend handles application state, triggers the built-in JavaScript statistical engine to perform complex mathematical computations, and instantly plots the outcomes.
-**Architecture Diagram:**
-*(Add system architecture diagram image here)*
+### Prerequisites
 
-## 5. Database Design
-**ER Diagram:**
-erDiagram
-  ```mermaid
-    SKU ||--o{ SalesData : has
-    SKU ||--o{ Forecast : has
-    SKU ||--o{ InventoryMetrics : has
+Ensure you have [Node.js](https://nodejs.org/) (v20+ recommended) and `npm` installed.
 
-    SKU {
-        string sku_id PK
-        string sku_name
-    }
+### 1. Clone the repository
 
-    SalesData {
-        string sales_id PK
-        date date
-        string sku_id FK
-        int sales_quantity
-    }
-
-    Forecast {
-        string forecast_id PK
-        string sku_id FK
-        date forecast_date
-        int forecast_quantity
-        float lower_confidence
-        float upper_confidence
-    }
-
-    InventoryMetrics {
-        string metric_id PK
-        string sku_id FK
-        int safety_stock
-        int reorder_point
-        int lead_time
-        float service_level
-    }
+```bash
+git clone <your-repository-url>
+cd codebox2.0
 ```
-**ER Diagram Description:**
-To guarantee speed and protect proprietary sales data, the system relies on an **In-Memory Client-Side State Mechanism** rather than a traditional relational database. Data is parsed via PapaParse from flat files into structured JSON objects temporarily held in React's virtual DOM memory.
 
-## 6. Dataset Selected
-**Dataset Name:** Sample Retail Demand Data
-**Source:** Custom generated hackathon samples (`advanced_retail_demand.csv`, `sample_demand.csv`)
-**Data Type:** Time-Series CSV
-**Selection Reason:** They contain standardized, real-world examples of dates alongside highly variable demand quantities.
-**Preprocessing Steps:** 
-1. Parsed dynamically using PapaParse.
-2. Checked and sorted chronologically.
-3. Extracted into uniform `{ date, value }` data structures.
+### 2. Install dependencies
 
-## 7. Model Selected
-**Model Name:** Holt's Double Exponential Smoothing (with Additive Seasonality Decomposition)
-**Selection Reasoning:** Holt's method excels at handling time-series data with prominent trends. Unlike Deep Learning models that require immense computational power, Holt's Method is extremely efficient, lightweight, and perfect to formulate dynamically in a web environment.
-**Alternatives Considered:** ARIMA (too computationally heavy for pure browser JS), Simple Moving Average (too basic, completely ignores growth/decay trends).
-**Evaluation Metrics:** Standard Deviation of in-sample errors, and the calculation of 95% Confidence Intervals for upper and lower bounds.
+```bash
+npm install
+```
 
-## 8. Technology Stack
-- **Frontend:** React, Vite, Recharts, Lucide-React
-- **Backend:** N/A (Serverless / Offline-first approach)
-- **ML/AI:** Custom JavaScript Statistical Implementation
-- **Database:** In-Memory App State
-- **Deployment:** Render / Vercel / Netlify configured
+### 3. Setup Environment Variables
 
-## 9. API Documentation & Testing
-*Because our application is completely offline-first, we eliminated traditional network API endpoints to reduce latency. Instead, our "API" consists of the internal Data Science functions handling the modeling.*
+Create a `.env` file in the root directory and add the necessary environment variables for Neon DB and Clerk Authentication:
 
-**API Endpoints List (Internal Engine Functions)**
-**Endpoint 1: `holtsMethod(values, alpha, beta, horizon)`**
-- Calculates the level, trend, and smooths historical data out into future `horizon` days.
-**Endpoint 2: `decompose(values, period)`**
-- Extracts and isolates the trend, seasonal changes, and residuals based on the data array.
-**Endpoint 3: `calculateRestocking(forecast, stdDev, leadTime)`**
-- Generates actionable metrics including Safety Stock and Reorder Points (ROP) based on variability.
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-**API Testing Screenshots:**
-*(Add Postman / Thunder Client / Console screenshots here)*
+DATABASE_URL=your_neon_postgres_database_url
+```
 
-## 10. Module-wise Development & Deliverables
-- **Checkpoint 1: Research & Planning**
-  - **Deliverables:** Finalized the decision to use mathematically solid statistical models over heavier AI approaches to achieve instant client-side rendering.
-- **Checkpoint 2: Core Engine Development (Backend Equivalent)**
-  - **Deliverables:** Built `lib/forecasting.js` to execute Exponential Smoothing algorithms without python dependencies.
-- **Checkpoint 3: Frontend Development**
-  - **Deliverables:** Set up React/Vite, crafted the dark-mode aesthetic dashboard, and engineered drag-and-drop CSV handling.
-- **Checkpoint 4: Model Training / Logic Binding**
-  - **Deliverables:** Created dynamic variable sliders (Alpha, Beta, Lead time) that instantly retrain and recalculate the models.
-- **Checkpoint 5: Model Integration**
-  - **Deliverables:** Tied the statistical outputs from the engine directly to Recharts for beautiful data visualization.
-- **Checkpoint 6: Deployment**
-  - **Deliverables:** Optimized build scripts, finalized layout responsiveness, ready for live hosting.
+### 4. Database Setup
 
-## 11. End-to-End Workflow
-1. User lands on the aesthetically pleasing, minimal dashboard.
-2. User uploads a historical sales CSV (e.g., `advanced_retail_demand.csv`).
-3. Application instantly maps columns and normalizes the data array.
-4. User leverages interactive sliders to alter the forecast horizon, level smoothing, and lead times.
-5. The application computes recommendations (Safety Stock, Daily Demand) in real-time, displaying them clearly via interactive charts.
+Ensure your database schema is pushed to Neon using Drizzle:
 
-## 12. Demo & Video
-**Live Demo Link:** *[Insert Link Here]*
-**Demo Video Link:** *[Insert Link Here]*
-**GitHub Repository:** *[Insert Link Here]*
+```bash
+npx drizzle-kit push
+```
 
-## 13. Hackathon Deliverables Summary
-We successfully built a blazingly fast, highly intuitive demand forecasting engine that operates completely in the browser. We accomplished mathematical modeling, comprehensive interactive charting, and dynamic inventory management metrics all while delivering a stunning dark-theme UI.
+*(You can also use Drizzle Studio to view your data natively by running `npx drizzle-kit studio`)*
 
-## 14. Team Roles & Responsibilities
-| Member Name | Role | Responsibilities |
-| :--- | :--- | :--- |
-| **[Member 1 Name]** | Frontend & UI/UX Engineer | Built the React dashboard, implemented Recharts visualizations, styled the intuitive user interface, and managed overall UX. |
-| **[Member 2 Name]** | Data Scientist & Logic | Acted as the core algorithm developer. Built Holt's Exponential Smoothing engine and Seasonality Decomposition entirely in JS. |
-| **[Member 3 Name]** | Integration & Architecture | Managed CSV parsing edge-cases, connected the state management with the forecasting tools, and handled documentation and optimization. |
+### 5. Run the Development Server
 
-## 15. Future Scope & Scalability
-**Short-Term:** 
-- Implement algorithmic Auto-Tuning to find the optimal Alpha/Beta variables automatically instead of relying purely on user adjustment.
-- Export forecast capabilities directly back to a downloadable CSV.
-**Long-Term:** 
-- Incorporate external APIs to connect directly with Shopify or WooCommerce stores to fetch real-time sales data.
-- Potentially integrate an optional Python FastAPI backend for serving more complex models like ARIMA or Prophet.
+```bash
+npm run dev
+```
 
-## 16. Known Limitations
-- The current engine uses purely Additive Decomposition, assuming consistent seasonality magnitude over time, which might shift in extreme scenarios.
-- The model requires clean, consistent chronological dates to operate flawlessly and has no extreme-anomaly detection yet.
-- Parameters must currently be tuned manually via provided sliders for the absolute "best" fit.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-## 17. Impact
-This tool radically reduces stockouts and minimizes overstock expenditures for small businesses. By bringing enterprise-level retail analytics directly to their web browser, business owners can derive completely private, free, and instant insights, making their inventory operations far more resilient and profitable.
+## 📂 Project Structure
+
+- `/app`: Next.js App Router providing application routes (`/(auth)`, `/(routes)`, `/api`, etc.)
+- `/config`: Drizzle ORM configuration and database schemas (`schema.ts`)
+- `/public`: Static assets, images, SVG icons, and banners.
+- `/components`: Reusable UI components.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## 📝 License
+
+This project is proprietary or licensed under your chosen license. (Update this section accordingly)
