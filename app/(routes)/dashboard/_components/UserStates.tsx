@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
 import Image from "next/image";
-import { useUser } from '@clerk/nextjs';
+import { useSession } from 'next-auth/react';
 
 function UserStates() {
-  const { user } = useUser()
+  const { data: session } = useSession()
+  const user = session?.user
 
 
   return (
@@ -16,7 +17,7 @@ function UserStates() {
           src="/alex_walk.gif" alt="walking-user" width={80} height={80}
         />
         <h2 className="font-game text-xl">
-          {user?.primaryEmailAddress?.emailAddress}
+          {user?.email}
         </h2>
       </div>
 

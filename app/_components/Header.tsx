@@ -14,14 +14,14 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useSession, signOut } from "next-auth/react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { Course } from "../(routes)/courses/_components/CourseList";
 
-
 function Header() {
-  const { user } = useUser();
+  const { data: session } = useSession();
+  const user = session?.user;
   const { exerciseSlug } = useParams();
 
   // ✅ FIX 1: Course[] (array)
@@ -110,7 +110,9 @@ function Header() {
               Dashboard
             </Button>
           </Link>
-          <UserButton />
+          <Button className="font-game text-xl" variant="destructive" onClick={() => signOut({ callbackUrl: '/' })}>
+            Logout
+          </Button>
         </div>
       )}
     </div>

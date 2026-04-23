@@ -1,14 +1,15 @@
-'use client'
+"use client";
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Exploremoresection from "./Exploremoresection";
-import { useAuth } from '@clerk/nextjs'
-
+import { useSession } from "next-auth/react";
 
 function Hero() {
-  const { isSignedIn } = useAuth();
+  const { status } = useSession();
+  const isSignedIn = status === "authenticated";
+
   return (
     <>
       {/* HERO SECTION */}
@@ -56,8 +57,6 @@ function Hero() {
               Dashboard
             </Button>
           </Link>}
-
-
         </div>
 
         {/* Scroll Hint */}

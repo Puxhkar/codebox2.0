@@ -15,9 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import Link from "next/link";
-import { useAuth } from '@clerk/nextjs'
-
-
+import { useSession } from "next-auth/react";
 
 type Props = {
   loading: boolean
@@ -25,9 +23,8 @@ type Props = {
 }
 
 function CourseChapters({loading,courseDetail}:Props) {
-
-  const {has} = useAuth();
-  const hasUnlimitedAccess = has&&has({ plan: 'unlimited' })
+  const { data: session } = useSession();
+  const hasUnlimitedAccess = false; // Mocking until Stripe is connected
 
 const EnableExercise = (
     chapterIndex: number,

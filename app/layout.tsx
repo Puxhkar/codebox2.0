@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Pixelify_Sans,Jersey_10 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import {ClerkProvider} from '@clerk/nextjs'
+import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -37,22 +37,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
     <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gameFont.variable} ${inter.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
-          disableTransitionOnChange={true}
-        >
-          {children}
-          <Toaster/>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={true}
+            disableTransitionOnChange={true}
+          >
+            {children}
+            <Toaster/>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
-    </ClerkProvider>
   );
 }

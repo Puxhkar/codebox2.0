@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EnrolledCourseTable } from "@/config/schema";
 import { db } from "@/config/db";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
 
 export async function POST(req: NextRequest) {
   try {
     const { courseId } = await req.json();
-    const user = await currentUser();
+    const session = await auth();
 
     // 1️⃣ Check if user is logged in
-    if (!user) {
+    if (!session?.user) {
       return NextResponse.json(
         { error: "User not logged in" },
         { status: 401 }
@@ -24,8 +24,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3️⃣ Validate userId (Clerk email MUST exist)
-    const email = user.primaryEmailAddress?.emailAddress;
+    // 3️⃣ Validate userId 
+    const email = session.user.email;
     if (!email) {
       return NextResponse.json(
         { error: "User email not found" },

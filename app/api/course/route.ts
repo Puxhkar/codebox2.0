@@ -1,15 +1,15 @@
 import {db} from '@/config/db';
 import { CompletedExerciseTable, CourseChapterTable, CourseTable, EnrolledCourseTable } from '@/config/schema';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@/auth';
 import { and, asc, desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
-
 
 export async function GET(req:NextRequest){
 
     const {searchParams} = new URL(req.url);
     const courseId = searchParams.get('courseid')
-    const user =  await currentUser();
+    const session = await auth();
+    const userEmail = session?.user?.email ?? '';
 
 if (courseId){
     const result = await db.select().from(CourseTable)
@@ -22,11 +22,11 @@ if (courseId){
 
     const enrolledCourse= await db.select().from(EnrolledCourseTable)
      //@ts-ignore
-    .where(and(eq(EnrolledCourseTable?.courseId,courseId),eq(EnrolledCourseTable.userId,user?.primaryEmailAddress?.emailAddress)  ))
+    .where(and(eq(EnrolledCourseTable?.courseId,courseId),eq(EnrolledCourseTable.userId,userEmail)  ))
 
     const isEnrolledCourse = enrolledCourse?.length>0?true:false
  //@ts-ignore
-    const completedExercises = await db.select().from(CompletedExerciseTable).where(and(eq(CompletedExerciseTable.courseId,courseId),eq(CompletedExerciseTable.userId,user?.primaryEmailAddress?.emailAddress)))
+    const completedExercises = await db.select().from(CompletedExerciseTable).where(and(eq(CompletedExerciseTable.courseId,courseId),eq(CompletedExerciseTable.userId,userEmail)))
     .orderBy(desc(CompletedExerciseTable?.courseId))
     
 
